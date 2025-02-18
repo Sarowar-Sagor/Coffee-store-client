@@ -57,8 +57,8 @@ const Users = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map(user => <tr key={user._id} className="hover">
-                                <th>2</th>
+                            users.map((user, index) => <tr key={user._id} className="hover">
+                                <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.createTime}</td>
