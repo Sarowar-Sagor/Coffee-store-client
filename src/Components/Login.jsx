@@ -1,13 +1,14 @@
 import { use, useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 const Login = () => {
     const { signUser, setUser } = useContext(AuthContext);
     // const [loginError, setLoginError] = useState({});
     // const location = useLocation();
     // console.log(location);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,7 +27,13 @@ const Login = () => {
                 const lastSignInTime = user?.metadata?.lastSignInTime;
                 const loginInfo = {email, lastSignInTime};
 
-                fetch('http://localhost:3000/users', {
+                //using axios instead of fetch
+                // axios.patch('https://coffee-store-server-two-wheat.vercel.app/users', loginInfo)
+                // .then(data => {
+                //     console.log(data.data);
+                // })
+
+                fetch('https://coffee-store-server-two-wheat.vercel.app/users', {
                     method: "PATCH",
                     headers: {
                         'content-type': "application/json"
@@ -35,13 +42,14 @@ const Login = () => {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    navigate("/");
+                    // console.log(data);
                 })
 
             })
             .catch(error => {
                 // setLoginError({ ...loginError, login: error.code });
-                console.log(error);
+                // console.log(error);
             })
     }
 

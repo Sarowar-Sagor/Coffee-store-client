@@ -1,8 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
     const coffee = useLoaderData();
+    const navigate = useNavigate();
     const { _id, name, availability, supplier, details, taste, category, photo } = coffee;
 
     const handleUpdate = (event) => {
@@ -20,7 +21,7 @@ const UpdateCoffee = () => {
         const updateCoffee = { name, availability, supplier, details, taste, category, photo };
         // console.log(updateCoffee);
 
-        fetch(`http://localhost:3000/coffee/${_id}`, {
+        fetch(`https://coffee-store-server-two-wheat.vercel.app/coffee/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': "application/json"
@@ -29,7 +30,7 @@ const UpdateCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.modifiedCount) {
                     Swal.fire({
                         position: "top",
@@ -38,13 +39,14 @@ const UpdateCoffee = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    navigate('/');
                 }
             })
     }
 
     return (
         <div className="bg-orange-100">
-            <h2 className="text-3xl text-orange-600 text-center font-bold">Update a coffee</h2>
+            <h2 className="text-3xl text-orange-600 text-center font-bold pt-3">Update a coffee</h2>
             <div className="px-14 py-7">
                 <form onSubmit={handleUpdate}>
                     <div className="grid grid-cols-2">

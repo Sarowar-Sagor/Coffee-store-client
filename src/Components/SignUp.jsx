@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const { createUser, setUser, userProfileUpdate } = useContext(AuthContext);
 
@@ -27,7 +27,7 @@ const SignUp = () => {
 
                 const newUser = { name, email, createTime };
 
-                fetch('http://localhost:3000/users', {
+                fetch('https://coffee-store-server-two-wheat.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'content-type': "application/json"
@@ -45,6 +45,8 @@ const SignUp = () => {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
+                            // form.reset();
+                            navigate("/");
                         }
                     })
 

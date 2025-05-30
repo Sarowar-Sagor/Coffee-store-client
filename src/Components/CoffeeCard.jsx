@@ -18,7 +18,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:3000/coffee/${id}`, {
+                fetch(`https://coffee-store-server-two-wheat.vercel.app/coffee/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -39,26 +39,29 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     }
 
     return (
-        <div className="card card-side bg-orange-100 shadow-xl">
+        <div className="card card-side bg-orange-100 shadow-xl pl-5 py-4">
             <figure>
                 <img
                     src={photo}
                     alt="Movie" />
             </figure>
             <div className="card-body flex flex-row justify-between">
-                <div>
+                <div className="space-y-3">
                     <h2 className="card-title">{name}</h2>
-                    <p>{supplier}</p>
-                    <p>{taste}</p>
+                    <p> <span className="font-bold">Supplier:</span> {supplier}</p>
+                    <p><span className="font-bold">Taste:</span> {taste}</p>
                     <p>{details}</p>
                 </div>
 
                 <div className="join join-vertical space-y-3">
-                    <button className="btn join-item">View</button>
+                    <Link to={`/details/${_id}`}>
+                        <button className="btn join-item">View</button>
+                    </Link>
+
                     <Link to={`/updatecoffee/${_id}`}>
                         <button className="btn join-item">Edit</button>
                     </Link>
-                    <button onClick={() => handleDelete(_id)} className="btn join-item bg-red-500">Delete</button>
+                    <button onClick={() => handleDelete(_id)} className="btn join-item hover:text-black text-white bg-red-500">Delete</button>
                 </div>
             </div>
         </div>

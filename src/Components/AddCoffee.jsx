@@ -15,9 +15,8 @@ const AddCoffee = () => {
     const category = form.category.value;
 
     const newCoffee = { name, availability, supplier, details, taste, category, photo };
-    console.log(newCoffee);
 
-    fetch('http://localhost:3000/coffee', {
+    fetch('https://coffee-store-server-two-wheat.vercel.app/coffee', {
       method: "POST",
       headers: {
         'content-type': "application/json"
@@ -26,7 +25,7 @@ const AddCoffee = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             position: "top",
@@ -41,7 +40,7 @@ const AddCoffee = () => {
 
   return (
     <div className="bg-orange-100">
-      <h2 className="text-3xl text-orange-600 text-center font-bold">Add a coffee</h2>
+      <h2 className="text-3xl text-orange-600 text-center font-bold pt-3">Add a coffee</h2>
       <div className="px-14 py-7">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2">

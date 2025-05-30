@@ -10,6 +10,11 @@ import Root from './Components/Root.jsx'
 import Login from './Components/Login.jsx'
 import SignUp from './Components/SignUp.jsx'
 import Users from './Components/Users.jsx'
+import Users2 from './Components/Users2.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Details from './Components/Details.jsx'
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -19,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App></App>,
-        loader: () => fetch("http://localhost:3000/coffee")
+        loader: () => fetch("https://coffee-store-server-two-wheat.vercel.app/coffee")
       },
       {
         path: "/addcoffee",
@@ -28,7 +33,12 @@ const router = createBrowserRouter([
       {
         path: "/updatecoffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`http://localhost:3000/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`https://coffee-store-server-two-wheat.vercel.app/coffee/${params.id}`)
+      },
+      {
+        path: "/details/:id",
+        element: <Details></Details>,
+        loader: ({ params }) => fetch(`https://coffee-store-server-two-wheat.vercel.app/coffee/${params.id}`)
       },
       {
         path: "/login",
@@ -41,7 +51,11 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users></Users>,
-        loader: () => fetch("http://localhost:3000/users")
+        loader: () => fetch("https://coffee-store-server-two-wheat.vercel.app/users")
+      },
+      {
+        path: "/users2",
+        element: <Users2></Users2>
       }
     ]
   }
@@ -49,8 +63,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+
   </StrictMode>,
 )
