@@ -45,7 +45,7 @@ const UpdateCoffee = () => {
     }
 
     return (
-        <div className="bg-orange-100">
+        <div className="bg-orange-100 mt-4">
             <h2 className="text-3xl text-orange-600 text-center font-bold pt-3">Update a coffee</h2>
             <div className="px-14 py-7">
                 <form onSubmit={handleUpdate}>

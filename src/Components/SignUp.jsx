@@ -68,7 +68,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="bg-base-300 mx-auto max-w-lg">
+        <div className="bg-base-300 mx-auto max-w-lg mt-4">
             <h2 className="font-semibold text-2xl text-center pt-8">Register your account</h2>
             <form onSubmit={handleSubmit} className="card-body">
                 <div className="form-control">

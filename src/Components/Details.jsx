@@ -5,8 +5,8 @@ const Details = () => {
     const coffee = useLoaderData();
     const { name, availability, supplier, details, taste, category, photo } = coffee;
     return (
-        <div className='flex justify-center bg-teal-100'>
-            <div className="card shadow-sm w-[50%] bg-lime-200">
+        <div className='flex justify-center bg-teal-100 mt-4'>
+            <div className="card shadow-sm w-[50%] bg-lime-200 my-5">
                 <figure className="pt-5">
                     <img
                         src={photo}
